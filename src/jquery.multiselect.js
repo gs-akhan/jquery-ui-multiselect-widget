@@ -36,6 +36,7 @@
       noneSelectedText: 'Select options',
       selectedText: '# selected',
       selectedList: 0,
+      closeIcon: 'ui-icon ui-icon-circle-close',
       show: null,
       hide: null,
       autoOpen: false,
@@ -86,7 +87,7 @@
               return '';
             }
           })
-          .append('<li class="ui-multiselect-close"><a href="#" class="ui-multiselect-close"><span class="ui-icon ui-icon-circle-close"></span></a></li>')
+          .append('<li class="ui-multiselect-close"><a href="#" class="ui-multiselect-close"><span class="'+o.closeIcon+'"></span></a></li>')
           .appendTo(header),
 
         checkboxContainer = (this.checkboxContainer = $('<ul />'))
@@ -417,7 +418,7 @@
       // restored to their defaultValue prop on form reset, and the reset
       // handler fires before the form is actually reset.  delaying it a bit
       // gives the form inputs time to clear.
-      $(this.element[0].form).bind('reset.multiselect', function() {
+      $(this.element[0].form).bind('reset.' + this._namespaceID, function() {
         setTimeout($.proxy(self.refresh, self), 10);
       });
     },
@@ -438,7 +439,8 @@
     // set menu width
     _setMenuWidth: function() {
       var m = this.menu;
-      m.outerWidth(this.button.outerWidth());
+      var width = (this.button.outerWidth() <= 0) ? this.options.minWidth : this.button.outerWidth();
+      m.outerWidth(width);
     },
 
     // move up or down within the menu
@@ -644,6 +646,7 @@
 
       // unbind events
       $doc.unbind(this._namespaceID);
+      $(this.element[0].form).unbind(this._namespaceID);
 
       this.button.remove();
       this.menu.remove();
