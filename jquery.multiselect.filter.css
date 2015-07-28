@@ -1,3 +1,4 @@
-.ui-multiselect-hasfilter ul { position:relative; top:2px }
-.ui-multiselect-filter { float:left; margin-right:10px; font-size:11px }
-.ui-multiselect-filter input { width:100px; font-size:10px; margin-left:5px; height:15px; padding:2px; border:1px solid #292929; -webkit-appearance:textfield; -webkit-box-sizing:content-box; }
+.ui-multiselect-hasfilter ul{position:relative;top:2px;}
+.ui-multiselect-filter{float:left;margin-right:5px;margin-left:5px;}
+.ui-multiselect-menu.Rtl .ui-multiselect-filter{float:right;}
+.ui-multiselect-filter input{width:100px;height:16px;-webkit-appearance:textfield;-moz-box-sizing:content-box;-ms-box-sizing:content-box;-o-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}

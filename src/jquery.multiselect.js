@@ -30,6 +30,7 @@
       header: true,
       height: 175,
       minWidth: 225,
+	  minWidthMenu: 225,
       classes: '',
       checkAllText: 'Check all',
       uncheckAllText: 'Uncheck all',
@@ -352,6 +353,8 @@
           break;
           case 13: // enter
             $(this).find('input')[0].click();
+			if(!self.options.multiple)
+				self.button.focus();
           break;
         }
       })
@@ -440,6 +443,9 @@
     _setMenuWidth: function() {
       var m = this.menu;
       var width = (this.button.outerWidth() <= 0) ? this.options.minWidth : this.button.outerWidth();
+	  if(/\d/.test(this.options.minWidthMenu) && width < this.options.minWidthMenu) {
+		width = this.options.minWidthMenu;
+      }
       m.outerWidth(width);
     },
 
@@ -681,12 +687,18 @@
 
         // otherwise fallback to custom positioning
       } else {
-        var pos = this.button.offset();
-
-        this.menu.css({
-          top: pos.top + this.button.outerHeight(),
-          left: pos.left
-        });
+		var pos = this.button.offset();
+		var posTop = pos.top + this.button.outerHeight();
+		if ((posTop + o.height) > $(window).height())
+		{
+			posTop = posTop - (this.menu.outerHeight() + this.button.outerHeight());
+			if( posTop < 0 )
+				posTop = 0;
+		}
+		this.menu.css({
+			top: posTop,
+			left: pos.left
+		});
       }
     },
 
