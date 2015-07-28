@@ -353,6 +353,8 @@
           break;
           case 13: // enter
             $(this).find('input')[0].click();
+			if(!self.options.multiple)
+				self.button.focus();
           break;
         }
       })
